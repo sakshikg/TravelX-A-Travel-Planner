@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incredible India - Package Details</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .header {
+            background-image: url('i1.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+        }
+        
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.7));
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            padding: 40px;
+            color: white;
+            width: 100%;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .breadcrumb a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .package-title {
+            font-size: 42px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .package-subtitle {
+            font-size: 18px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .package-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            color: #1a3b5d;
+            margin-bottom: 10px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: #2c7873;
+        }
+        
+        .section-subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+        
+        /* Tourist Places Styles */
+        .places-container {
+            width: 100%;
+            overflow-x: auto;
+            padding: 20px 0;
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            position: relative;
+        }
+        
+        .places-container::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .places-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .places-container::-webkit-scrollbar-thumb {
+            background: #2c7873;
+            border-radius: 10px;
+        }
+        
+        .places-slider {
+            display: flex;
+            gap: 20px;
+            transition: transform 0.5s ease;
+        }
+        
+        .place-card {
+            min-width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .place-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .place-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .place-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .place-card:hover .place-image img {
+            transform: scale(1.1);
+        }
+        
+        .place-details {
+            padding: 20px;
+        }
+        
+        .place-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a3b5d;
+            margin-bottom: 10px;
+        }
+        
+        .place-address {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 5px;
+        }
+        
+        .place-address-icon {
+            color: #2c7873;
+            flex-shrink: 0;
+            font-size: 16px;
+        }
+        
+        .place-description {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        /* Hotel Styles */
+        .hotels-container {
+            width: 100%;
+            overflow-x: auto;
+            padding: 20px 0;
+            scroll-behavior: smooth;
+            position: relative;
+        }
+        
+        .hotels-container::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .hotels-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .hotels-container::-webkit-scrollbar-thumb {
+            background: #2c7873;
+            border-radius: 10px;
+        }
+        
+        .hotels-slider {
+            display: flex;
+            gap: 20px;
+            transition: transform 0.5s ease;
+        }
+        
+        .hotel-card {
+            min-width: 350px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .hotel-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .hotel-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .hotel-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .hotel-card:hover .hotel-image img {
+            transform: scale(1.1);
+        }
+        
+        .hotel-rating {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .hotel-details {
+            padding: 20px;
+        }
+        
+        .hotel-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a3b5d;
+            margin-bottom: 10px;
+        }
+        
+        .hotel-location {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 5px;
+        }
+        
+        .hotel-location-icon {
+            color: #2c7873;
+            flex-shrink: 0;
+        }
+        
+        .hotel-price {
+            font-weight: 700;
+            font-size: 18px;
+            color: #2c7873;
+            margin-top: 10px;
+        }
+        
+        .hotel-amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .amenity {
+            background-color: #f0f2f5;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            color: #555;
+        }
+        
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .control-btn {
+            background-color: #2c7873;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .control-btn:hover {
+            background-color: #1a5653;
+        }
+        
+        .control-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                height: 300px;
+            }
+            
+            .package-title {
+                font-size: 32px;
+            }
+            
+            .package-subtitle {
+                font-size: 16px;
+            }
+            
+            .place-card,
+            .hotel-card {
+                min-width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Banner -->
+    <div class="header">
+        <div class="header-overlay"></div>
+        <div class="header-content">
+            <div class="breadcrumb">
+                <a href="#">Home</a> &gt; <a href="#">Packages</a> &gt; Incredible India
+            </div>
+            <h1 class="package-title">Incredible India</h1>
+            <p class="package-subtitle">Experience the rich culture and diversity with our 10-day Golden Triangle tour plus Varanasi and Kerala</p>
+            <div class="package-meta">
+                <div class="meta-item">
+                    <span class="meta-icon">✓</span>
+                    <span>10 Days</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">✓</span>
+                    <span>5 Cities</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">✓</span>
+                    <span>4-5★ Heritage Hotels</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">₹</span>
+                    <span>58,999 per person</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Tourist Places Section -->
+        <h2 class="section-title">Popular Tourist Places</h2>
+        <p class="section-subtitle">Explore the must-visit destinations included in your package</p>
+        
+        <div class="places-container" id="places-container">
+            <div class="places-slider" id="places-slider">
+                <!-- Place 1 -->
+                <div class="place-card">
+                    <div class="place-image">
+                        <img src="i2.jpg" alt="Taj Mahal">
+                    </div>
+                    <div class="place-details">
+                        <h3 class="place-name">Taj Mahal</h3>
+                        <div class="place-address">
+                            <span class="place-address-icon">📍</span>
+                            <span>Agra, Uttar Pradesh</span>
+                        </div>
+                        <p class="place-description">One of the seven wonders of the world, the Taj Mahal is a symbol of eternal love built by Emperor Shah Jahan.</p>
+                    </div>
+                </div>
+                
+                <!-- Place 2 -->
+                <div class="place-card">
+                    <div class="place-image">
+                        <img src="i3.jpg" alt="Amber Fort">
+                    </div>
+                    <div class="place-details">
+                        <h3 class="place-name">Amber Fort</h3>
+                        <div class="place-address">
+                            <span class="place-address-icon">📍</span>
+                            <span>Jaipur, Rajasthan</span>
+                        </div>
+                        <p class="place-description">Built from red sandstone and marble, this magnificent fort overlooks Maota Lake and features stunning architecture.</p>
+                    </div>
+                </div>
+                
+                <!-- Place 3 -->
+                <div class="place-card">
+                    <div class="place-image">
+                        <img src="i4.jpg" alt="Ganges Ghats">
+                    </div>
+                    <div class="place-details">
+                        <h3 class="place-name">Ganges Ghats</h3>
+                        <div class="place-address">
+                            <span class="place-address-icon">📍</span>
+                            <span>Varanasi, Uttar Pradesh</span>
+                        </div>
+                        <p class="place-description">Experience the spiritual heart of India at the sacred ghats along the Ganges River with the famous evening Aarti ceremony.</p>
+                    </div>
+                </div>
+                
+                <!-- Place 4 -->
+                <div class="place-card">
+                    <div class="place-image">
+                        <img src="i5.jpg" alt="Backwaters">
+                    </div>
+                    <div class="place-details">
+                        <h3 class="place-name">Alleppey Backwaters</h3>
+                        <div class="place-address">
+                            <span class="place-address-icon">📍</span>
+                            <span>Alleppey, Kerala</span>
+                        </div>
+                        <p class="place-description">Cruise through the serene backwaters of Kerala on a traditional houseboat and experience the beauty of God's Own Country.</p>
+                    </div>
+                </div>
+                
+                <!-- Place 5 -->
+                <div class="place-card">
+                    <div class="place-image">
+                        <img src="i6.jpg" alt="Humayun's Tomb">
+                    </div>
+                    <div class="place-details">
+                        <h3 class="place-name">Humayun's Tomb</h3>
+                        <div class="place-address">
+                            <span class="place-address-icon">📍</span>
+                            <span>New Delhi, Delhi</span>
+                        </div>
+                        <p class="place-description">This UNESCO World Heritage Site is known for its spectacular Mughal architecture and beautiful gardens.</p>
+                    </div>
+                </div>
+                
+                <!-- Place 6 -->
+                <div class="place-card">
+                    <div class="place-image">
+                        <img src="i7.jpg" alt="Munnar Tea Gardens">
+                    </div>
+                    <div class="place-details">
+                        <h3 class="place-name">Munnar Tea Gardens</h3>
+                        <div class="place-address">
+                            <span class="place-address-icon">📍</span>
+                            <span>Munnar, Kerala</span>
+                        </div>
+                        <p class="place-description">Explore the picturesque tea plantations nestled among the rolling hills of this beautiful hill station.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slider-controls">
+            <button class="control-btn" id="places-prev">&lt;</button>
+            <button class="control-btn" id="places-next">&gt;</button>
+        </div>
+        
+        <!-- Recommended Hotels Section -->
+        <h2 class="section-title">Recommended Hotels</h2>
+        <p class="section-subtitle">Luxurious accommodations included in your package</p>
+        
+        <div class="hotels-container" id="hotels-container">
+            <div class="hotels-slider" id="hotels-slider">
+                <!-- Hotel 1 -->
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="i8.jpg" alt="Taj Palace">
+                        <div class="hotel-rating">5.0 ★</div>
+                    </div>
+                    <div class="hotel-details">
+                        <h3 class="hotel-name">Taj Palace</h3>
+                        <div class="hotel-location">
+                            <span class="hotel-location-icon">📍</span>
+                            <span>New Delhi, Delhi</span>
+                        </div>
+                        <div class="hotel-amenities">
+                            <span class="amenity">Swimming Pool</span>
+                            <span class="amenity">Spa</span>
+                            <span class="amenity">Fine Dining</span>
+                            <span class="amenity">Gym</span>
+                        </div>
+                        <div class="hotel-price">₹12,500 per night</div>
+                    </div>
+                </div>
+                
+                <!-- Hotel 2 -->
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="i9.jpg" alt="Oberoi Amarvilas">
+                        <div class="hotel-rating">5.0 ★</div>
+                    </div>
+                    <div class="hotel-details">
+                        <h3 class="hotel-name">Oberoi Amarvilas</h3>
+                        <div class="hotel-location">
+                            <span class="hotel-location-icon">📍</span>
+                            <span>Agra, Uttar Pradesh</span>
+                        </div>
+                        <div class="hotel-amenities">
+                            <span class="amenity">Taj Mahal Views</span>
+                            <span class="amenity">Spa</span>
+                            <span class="amenity">Fine Dining</span>
+                            <span class="amenity">Butler Service</span>
+                        </div>
+                        <div class="hotel-price">₹18,000 per night</div>
+                    </div>
+                </div>
+                
+                <!-- Hotel 3 -->
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="i10.jpg" alt="Rambagh Palace">
+                        <div class="hotel-rating">5.0 ★</div>
+                    </div>
+                    <div class="hotel-details">
+                        <h3 class="hotel-name">Rambagh Palace</h3>
+                        <div class="hotel-location">
+                            <span class="hotel-location-icon">📍</span>
+                            <span>Jaipur, Rajasthan</span>
+                        </div>
+                        <div class="hotel-amenities">
+                            <span class="amenity">Heritage Property</span>
+                            <span class="amenity">Royal Experience</span>
+                            <span class="amenity">Fine Dining</span>
+                            <span class="amenity">Polo Bar</span>
+                        </div>
+                        <div class="hotel-price">₹15,500 per night</div>
+                    </div>
+                </div>
+                
+                <!-- Hotel 4 -->
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="i11.jpg" alt="Brijrama Palace">
+                        <div class="hotel-rating">4.8 ★</div>
+                    </div>
+                    <div class="hotel-details">
+                        <h3 class="hotel-name">Brijrama Palace</h3>
+                        <div class="hotel-location">
+                            <span class="hotel-location-icon">📍</span>
+                            <span>Varanasi, Uttar Pradesh</span>
+                        </div>
+                        <div class="hotel-amenities">
+                            <span class="amenity">River Views</span>
+                            <span class="amenity">Heritage Property</span>
+                            <span class="amenity">Rooftop Dining</span>
+                            <span class="amenity">Cultural Shows</span>
+                        </div>
+                        <div class="hotel-price">₹14,200 per night</div>
+                    </div>
+                </div>
+                
+                <!-- Hotel 5 -->
+                <div class="hotel-card">
+                    <div class="hotel-image">
+                        <img src="i12.jpg" alt="Kumarakom Lake Resort">
+                        <div class="hotel-rating">4.9 ★</div>
+                    </div>
+                    <div class="hotel-details">
+                        <h3 class="hotel-name">Kumarakom Lake Resort</h3>
+                        <div class="hotel-location">
+                            <span class="hotel-location-icon">📍</span>
+                            <span>Kumarakom, Kerala</span>
+                        </div>
+                        <div class="hotel-amenities">
+                            <span class="amenity">Private Pool</span>
+                            <span class="amenity">Ayurvedic Spa</span>
+                            <span class="amenity">Lake Views</span>
+                            <span class="amenity">Unique Cuisine</span>
+                        </div>
+                        <div class="hotel-price">₹16,800 per night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slider-controls">
+            <button class="control-btn" id="hotels-prev">&lt;</button>
+            <button class="control-btn" id="hotels-next">&gt;</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Places slider functionality
+            const placesContainer = document.getElementById('places-container');
+            const placesSlider = document.getElementById('places-slider');
+            const placeCards = document.querySelectorAll('.place-card');
+            const placesPrevBtn = document.getElementById('places-prev');
+            const placesNextBtn = document.getElementById('places-next');
+            
+            let placesPosition = 0;
+            const placeCardWidth = 320; // card width + gap
+            
+            // Initialize buttons state
+            placesPrevBtn.disabled = true;
+            
+            // Places navigation functionality
+            placesPrevBtn.addEventListener('click', function() {
+                navigatePlaces('prev');
+            });
+            
+            placesNextBtn.addEventListener('click', function() {
+                navigatePlaces('next');
+            });
+            
+            function navigatePlaces(direction) {
+                const maxScroll = placeCards.length * placeCardWidth - placesContainer.offsetWidth;
+                
+                if (direction === 'next' && placesPosition < maxScroll) {
+                    placesPosition += placeCardWidth;
+                } else if (direction === 'prev' && placesPosition > 0) {
+                    placesPosition -= placeCardWidth;
+                }
+                
+                // Apply the translation
+                placesSlider.style.transform = `translateX(-${placesPosition}px)`;
+                
+                // Update button states
+                placesPrevBtn.disabled = placesPosition <= 0;
+                placesNextBtn.disabled = placesPosition >= maxScroll;
+            }
+            
+            // Hotels slider functionality
+            const hotelsContainer = document.getElementById('hotels-container');
+            const hotelsSlider = document.getElementById('hotels-slider');
+            const hotelCards = document.querySelectorAll('.hotel-card');
+            const hotelsPrevBtn = document.getElementById('hotels-prev');
+            const hotelsNextBtn = document.getElementById('hotels-next');
+            
+            let hotelsPosition = 0;
+            const hotelCardWidth = 370; // card width + gap
+            
+            // Initialize buttons state
+            hotelsPrevBtn.disabled = true;
+            
+            // Hotels navigation functionality
+            hotelsPrevBtn.addEventListener('click', function() {
+                navigateHotels('prev');
+            });
+            
+            hotelsNextBtn.addEventListener('click', function() {
+                navigateHotels('next');
+            });
+            
+            function navigateHotels(direction) {
+                const maxScroll = hotelCards.length * hotelCardWidth - hotelsContainer.offsetWidth;
+                
+                if (direction === 'next' && hotelsPosition < maxScroll) {
+                    hotelsPosition += hotelCardWidth;
+                } else if (direction === 'prev' && hotelsPosition > 0) {
+                    hotelsPosition -= hotelCardWidth;
+                }
+                
+                // Apply the translation
+                hotelsSlider.style.transform = `translateX(-${hotelsPosition}px)`;
+                
+                // Update button states
+                hotelsPrevBtn.disabled = hotelsPosition <= 0;
+                hotelsNextBtn.disabled = hotelsPosition >= maxScroll;
+            }
+            
+            // Optional: Allow keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft') {
+                    navigatePlaces('prev');
+                    navigateHotels('prev');
+                } else if (e.key === 'ArrowRight') {
+                    navigatePlaces('next');
+                    navigateHotels('next');
+                }
+            });
+            
+            // Optional: Touch swipe functionality
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            // For places slider
+            placesContainer.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            placesContainer.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe(touchStartX, touchEndX, 'places');
+            });
+            
+            // For hotels slider
+            hotelsContainer.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            hotelsContainer.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe(touchStartX, touchEndX, 'hotels');
+            });
+            
+            function handleSwipe(start, end, type) {
+                const swipeThreshold = 50;
+                if (start - end > swipeThreshold) {
+                    // Swiped left, go next
+                    if (type === 'places') {
+                        navigatePlaces('next');
+                    } else {
+                        navigateHotels('next');
+                    }
+                } else if (end - start > swipeThreshold) {
+                    // Swiped right, go prev
+                    if (type === 'places') {
+                        navigatePlaces('prev');
+                    } else {
+                        navigateHotels('prev');
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

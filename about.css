@@ -1,0 +1,66 @@
+body {
+    
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    background:url("aboutback.jpg");
+}
+
+.about-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    max-width: 900px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease-in-out;
+}
+
+.about-text {
+    width: 50%;
+}
+
+.about-text h1 {
+    font-size: 2rem;
+    color: #333;
+}
+
+.about-text p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.about-image {
+    width: 50%;
+    text-align: right;
+}
+
+.about-image img {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-text, .about-image {
+        width: 100%;
+    }
+
+    .about-image {
+        margin-top: 15px;
+    }
+}
