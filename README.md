@@ -35,7 +35,10 @@
 ---
     git clone https://github.com/yourusername/travelx.git
 2.Navigate to the project folder
-cd travelx
+
+---
+    cd travelx
+
 3.Open index.html in your browser or use a local static server.
 🔑 If you’re using Firebase Auth, make sure to replace the Firebase config in index.html with your own project credentials.
 
